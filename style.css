@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: rgb(196, 10, 10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+#gameContainer {
+    text-align: center;
+}
+
+#score {
+    color: lightgrey;
+    font-family: 'OCR A Std', monospace, center;
+    font-size:100px;
+}
