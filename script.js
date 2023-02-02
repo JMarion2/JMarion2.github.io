@@ -6,7 +6,7 @@ const maxPaddleY = canvas.height - grid - paddleHeight;
 
 
 var paddleSpeed = 6;
-var ballSpeed = 2;
+var ballSpeed = 3;
 
 //added variables
 const scoreText = document.querySelector("#score");
