@@ -1,17 +1,20 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
+const popup_mssg = document.getElementById('popup-mssg');
 const grid = 15;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
 
 var paddleSpeed = 6;
-var ballSpeed = 3;
+var leftPaddleSpeed = 5.45;
+var ballSpeed = 5;
 
 //added variables
-const scoreText = document.querySelector("#score");
 var playerScore1 = 0;
 var playerScore2 = 0;
+var scores = playerScore1 + " - " + playerScore2;
+document.getElementById('scoreboard').innerHTML = scores;
 
 const leftPaddle = {
   // start in the middle of the game on the left side
@@ -59,9 +62,9 @@ function collides(obj1, obj2) {
 }
 
 // function updates player scores
-function updateScore() {
-    scoreText.textContent = `${playerScore1} : ${playerScore2}`;
-}
+//function updateScore() {
+   // scoreText.textContent = `${playerScore1} : ${playerScore2}`;
+//}
 
 // game loop
 function loop() {
@@ -95,6 +98,14 @@ function loop() {
   // move ball by its velocity
   ball.x += ball.dx;
   ball.y += ball.dy;
+  
+  // left paddle w/ ball movement
+  if(ball.dy < 0) {
+    leftPaddle.dy = -leftPaddleSpeed;
+  }
+  if (ball.dy > 0) {
+    leftPaddle.dy = leftPaddleSpeed;
+  }
 
   // prevent ball from going through walls by changing its velocity
   if (ball.y < grid) {
@@ -108,20 +119,17 @@ function loop() {
 
   // reset ball if it goes past paddle (but only if we haven't already done so)
   if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
-      // if ball x < 0 right player2 gets a point
-      if (ball.x < 0) {
-          playerScore2 += 1;
-          updateScore();
-          //want to update score before resetting ball
-          ball.resetting = true;
-        }
-        //else player1 gets a point
-        else {
-            playerScore1 += 1;
-            updateScore();
-            ball.resetting = true;
-        }
-    
+    ball.resetting = true;
+    if (ball.x < 0) {
+      playerScore2++;
+      scores = playerScore1 + " - " + playerScore2;
+      document.getElementById('scoreboard').innerHTML = scores;
+    }
+    if(ball.x > canvas.width){
+      playerScore1++;
+      scores = playerScore1 + " - " + playerScore2;
+      document.getElementById('scoreboard').innerHTML = scores;
+    }
     setTimeout(() => {
       ball.resetting = false;
       ball.x = canvas.width / 2;
@@ -157,10 +165,15 @@ function loop() {
   for (let i = grid; i < canvas.height - grid; i += grid * 2) {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
   }
+  
+  if(playerScore1 == 7 || playerScore2 == 7) {
+    handlePopUp();
+  }
 }
 
 // listen to keyboard events to move the paddles
 document.addEventListener('keydown', function(e) {
+ 
 
   // up arrow key
   if (e.which === 38) {
@@ -170,15 +183,6 @@ document.addEventListener('keydown', function(e) {
   else if (e.which === 40) {
     rightPaddle.dy = paddleSpeed;
   }
-
-  // w key
-  if (e.which === 87) {
-    leftPaddle.dy = -paddleSpeed;
-  }
-  // a key
-  else if (e.which === 83) {
-    leftPaddle.dy = paddleSpeed;
-  }
 });
 
 // listen to keyboard events to stop the paddle if key is released
@@ -186,11 +190,43 @@ document.addEventListener('keyup', function(e) {
   if (e.which === 38 || e.which === 40) {
     rightPaddle.dy = 0;
   }
-
-  if (e.which === 83 || e.which === 87) {
-    leftPaddle.dy = 0;
-  }
 });
 
+// Popup for outcome of game
+function handlePopUp() {
+  if (playerScore1 == 7) {
+    document.getElementById('outcome').innerHTML = "It was a good try, better luck next time!";
+    
+  }
+  else {
+    document.getElementById('outcome').results.innerHTML = "Jeez, they just let anyone win nowadays. Nice Job Champ!";
+  }
+  showPopUp();
+  
+  // stop ball once game ends
+  ball.resetting = true;
+}
+// start game again
+function rematch() {
+  playerScore1 = 0;
+  playerScore2 = 0;
+  scores = playerScore1 + " - " + playerScore2;
+  document.getElementById('scoreboard').innerHTML = scores;
+  
+  popup_mssg.style.display = "none";
+  
+  setTimeout(() => {
+    ball.resetting = false;
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+  }, 400);
+}
+
+function showPopup(){
+        popup_mssg.style.display = "block";
+}
+  
+  
+  
 // start the game
 requestAnimationFrame(loop);
