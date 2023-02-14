@@ -122,15 +122,15 @@ function loop() {
     ball.resetting = true;
       // if ball x < 0 right player2 gets a point
       if (ball.x < 0) {
-          playerScore2++;
-          scores = playerScore1 + " - " + playerScore2;
-          document.getElementById('scoreboard').innerHTML = scores;
+        playerScore2++;
+        scores = playerScore1 + " - " + playerScore2;
+        document.getElementById('scoreboard').innerHTML = scores;
       }
       if(ball.x > canvas.width){
         playerScore1++; 
         scores = playerScore1 + " - " + playerScore2;
         document.getElementById('scoreboard').innerHTML = scores;
-          ball.resetting = true;
+         
         }
     // rest before launching ball again
     setTimeout(() => {
