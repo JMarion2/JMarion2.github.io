@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="gameContainer">
-      <div id="score">0 : 0</div>
-      <canvas width="750" height="585" id="game"></canvas>
-      <script src="script.js"></script>
-      
+    <div class="popup_mssg" id="popup-mssg">
+      <p class="outcome" id="outcome"></p>
+      <button class="rematch" id="rematch" onclick="rematch()">Rematch</button>
     </div>
+    <canvas width="750" height="585" id="game"></canvas>
+      <p class="scoreboard" id="scoreboard"></p>
+    <script src="script.js"></script>
   </body>
 </html>
