@@ -120,19 +120,16 @@ function loop() {
   // reset ball if it goes past paddle (but only if we haven't already done so)
   if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
     ball.resetting = true;
-      // if ball x < 0 right player2 gets a point
-      if (ball.x < 0) {
-        playerScore2++;
-        scores = playerScore1 + " - " + playerScore2;
-        document.getElementById('scoreboard').innerHTML = scores;
-      }
-      if(ball.x > canvas.width){
-        playerScore1++; 
-        scores = playerScore1 + " - " + playerScore2;
-        document.getElementById('scoreboard').innerHTML = scores;
-         
-        }
-    // rest before launching ball again
+    if (ball.x < 0) {
+      playerScore2++;
+      scores = playerScore1 + " - " + playerScore2;
+      document.getElementById('scoreboard').innerHTML = scores;
+    }
+    if(ball.x > canvas.width){
+      playerScore1++;
+      scores = playerScore1 + " - " + playerScore2;
+      document.getElementById('scoreboard').innerHTML = scores;
+    }
     setTimeout(() => {
       ball.resetting = false;
       ball.x = canvas.width / 2;
