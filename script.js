@@ -210,7 +210,7 @@ function handlePopUp() {
 function rematch() {
   playerScore1 = 0;
   playerScore2 = 0;
-  score = playerScore1 + " - " + playerScore2;
+  scores = playerScore1 + " - " + playerScore2;
   document.getElementById('scoreboard').innerHTML = scores;
   
   popup_mssg.style.display = "none";
