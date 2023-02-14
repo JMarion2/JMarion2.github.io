@@ -10,12 +10,33 @@ html, body {
     justify-content: center;
   }
 
-#gameContainer {
-    text-align: center;
+.popup_mssg {
+    Width: 850px;
+    Height: 600px;
+    Background: rgb(196, 10,10);
+    Box-sizing: border-box;
+    Padding: 10px;
+    Position: absolute;
+    top:50%;
+    left:50%;
+    Transform: translate(-50%, -50%);
+    
+    display:none;
 }
-
-#score {
-    color: lightgrey;
-    font-family: 'OCR A Std', monospace, center;
-    font-size:100px;
+.resuts {
+    align-items: center;
+    position: absolute;
+    left: 300px;
+    top: 75px
+    
+    font-size: 45pt;
+    font-family: "Gill Sans", sans-serif;
+}
+.remach:hover {background-color: red}
+.scoreboard {
+    position: absolute;
+    align-items: center;
+    color:rgb(0,0,158);
+    font-size: 45px;
+    top: 0px;
 }
