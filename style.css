@@ -2,54 +2,54 @@ html, body {
     height: 100%;
     margin: 0;
   }
-
-  body {
-    background: rgb(196, 10, 10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-.popup_mssg {
-    Width: 850px;
-    Height: 600px;
-    Background: rgb(196, 10,10);
-    Box-sizing: border-box;
-    Padding: 10px;
-    Position: absolute;
-    top:50%;
-    left:50%;
-    Transform: translate(-50%, -50%);
-    
-    display:none;
+body {
+  background: rgb(106,90, 205);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.results {
+
+.popup_mssg{
+  Width: 850px;
+  Height: 600px;
+  Background: rgb(255, 165,0);
+  Box-sizing: border-box;
+  Padding: 10px;
+      
+  Position: absolute;
+  top:50%;
+  left:50%;
+  Transform: translate(-50%, -50%);
+      
+  display:none; 
+ }
+ .outcome {
     align-items: center;
     position: absolute;
     left: 300px;
-    top: 75px
-    
+    top: 75px;
     font-size: 45pt;
     font-family: "Gill Sans", sans-serif;
-}
-.rematch {
+  }
+  .rematch {
     align-items: center;
     position: absolute;
     width: 250px;
     height: 100px;
     left: 300px;
     top: 400px;
-    background-color: rgb(48, 59, 97);
+          
+    background-color: rgb(0, 0, 255);
     color: rgb(255, 255, 254);
     border: 2px solid #ffffff;
     font-size: 30pt;
     font-family: "Gill Sans", sans-serif;
-}
-.rematch:hover {background-color: red}
-.scoreboard {
-    position: absolute;
-    align-items: center;
-    color:rgb(0,0,158);
-    font-size: 45px;
-    top: 0px;
+   }
+   .rematch:hover {background-color: #0b0f24}
+   .scoreboard {
+     position: absolute;
+     align-items: center; 
+     color:rgb(0,0,158);
+     font-size: 45px;
+     top: 0px;
 }

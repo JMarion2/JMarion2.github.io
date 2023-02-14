@@ -199,7 +199,7 @@ function handlePopUp() {
     
   }
   else {
-    document.getElementById('outcome').results.innerHTML = "Jeez, they just let anyone win nowadays. Nice Job Champ!";
+    document.getElementById('outcome').innerHTML = "Jeez, they just let anyone win nowadays. Nice Job Champ!";
   }
   showPopUp();
   
@@ -222,7 +222,7 @@ function rematch() {
   }, 400);
 }
 
-function showPopup(){
+function showPopUp(){
         popup_mssg.style.display = "block";
 }
   
