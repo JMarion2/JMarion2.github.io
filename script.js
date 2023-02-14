@@ -1,6 +1,6 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
-const context = canvas.getContext('2d');
+const popup_mssg = document.getElementById('popup-mssg');
 const grid = 15;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
@@ -11,9 +11,10 @@ var leftPaddleSpeed = 5.45;
 var ballSpeed = 5;
 
 //added variables
-const scoreText = document.querySelector("#score");
 var playerScore1 = 0;
 var playerScore2 = 0;
+var scores = playerScore1 + " - " + playerScore2;
+document.getElementById('scoreboard').innerHTML = scores;
 
 const leftPaddle = {
   // start in the middle of the game on the left side
@@ -61,9 +62,9 @@ function collides(obj1, obj2) {
 }
 
 // function updates player scores
-function updateScore() {
-    scoreText.textContent = `${playerScore1} : ${playerScore2}`;
-}
+//function updateScore() {
+   // scoreText.textContent = `${playerScore1} : ${playerScore2}`;
+//}
 
 // game loop
 function loop() {
@@ -97,6 +98,14 @@ function loop() {
   // move ball by its velocity
   ball.x += ball.dx;
   ball.y += ball.dy;
+  
+  // left paddle w/ ball movement
+  if(ball.dy < 0) {
+    leftPaddle.dy = -leftPaddleSpeed;
+  }
+  if (ball.dy > 0) {
+    leftPaddle.dy = leftPaddleSpeed;
+  }
 
   // prevent ball from going through walls by changing its velocity
   if (ball.y < grid) {
@@ -110,20 +119,20 @@ function loop() {
 
   // reset ball if it goes past paddle (but only if we haven't already done so)
   if ( (ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
+    ball.resetting = true;
       // if ball x < 0 right player2 gets a point
       if (ball.x < 0) {
-          playerScore2 += 1;
-          updateScore();
-          //want to update score before resetting ball
+          playerScore2++;
+          scores = playerScore1 + " - " + playerScore2;
+          document.getElementById('scoreboard').innerHTML = scores;
+      }
+      if(ball.x > canvas.width){
+        playerScore1++; 
+        scores = playerScore1 + " - " + playerScore2;
+        document.getElementById('scoreboard').innerHTML = scores;
           ball.resetting = true;
         }
-        //else player1 gets a point
-        else {
-            playerScore1 += 1;
-            updateScore();
-            ball.resetting = true;
-        }
-    
+    // rest before launching ball again
     setTimeout(() => {
       ball.resetting = false;
       ball.x = canvas.width / 2;
@@ -160,7 +169,7 @@ function loop() {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
   }
   
-  if(PlayerScore1 == 7 || PlayerScore2 == 7) {
+  if(playerScore1 == 7 || playerScore2 == 7) {
     handlePopUp();
   }
 }
@@ -188,7 +197,7 @@ document.addEventListener('keyup', function(e) {
 
 // Popup for outcome of game
 function handlePopUp() {
-  if (PlayerScore1 == 7) {
+  if (playerScore1 == 7) {
     document.getElementById('outcome').innerHTML = "It was a good try, better luck next time!";
     
   }
@@ -202,12 +211,12 @@ function handlePopUp() {
 }
 // start game again
 function rematch() {
-  PlayerScore1 = 0;
-  PlayerScore2 = 0;
-  score = PlayerScore1 + " - " + PlayerScore2;
+  playerScore1 = 0;
+  playerScore2 = 0;
+  score = playerScore1 + " - " + playerScore2;
   document.getElementById('scoreboard').innerHTML = scores;
   
-  my_popup.style.display = "none";
+  popup_mssg.style.display = "none";
   
   setTimeout(() => {
     ball.resetting = false;
@@ -217,7 +226,7 @@ function rematch() {
 }
 
 function showPopup(){
-        my_popup.style.display = "block";
+        popup_mssg.style.display = "block";
 }
   
   
