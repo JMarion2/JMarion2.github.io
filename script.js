@@ -222,7 +222,7 @@ function rematch() {
   }, 400);
 }
 
-function showPopup(){
+function showPopUp(){
         popup_mssg.style.display = "block";
 }
   
