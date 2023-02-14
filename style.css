@@ -23,7 +23,7 @@ html, body {
     
     display:none;
 }
-.resuts {
+.results {
     align-items: center;
     position: absolute;
     left: 300px;
@@ -32,7 +32,20 @@ html, body {
     font-size: 45pt;
     font-family: "Gill Sans", sans-serif;
 }
-.remach:hover {background-color: red}
+.rematch {
+    align-items: center;
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    left: 300px;
+    top: 400px;
+    background-color: rgb(48, 59, 97);
+    color: rgb(255, 255, 254);
+    border: 2px solid #ffffff;
+    font-size: 30pt;
+    font-family: "Gill Sans", sans-serif;
+}
+.rematch:hover {background-color: red}
 .scoreboard {
     position: absolute;
     align-items: center;
